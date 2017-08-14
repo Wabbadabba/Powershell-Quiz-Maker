@@ -1,0 +1,81 @@
+$Questions = @(
+    [pscustomobject]@{
+        Question = "What is the capital of France?";
+        Answers = (
+            'A: Paris', 
+            'B: Madrid',
+            'C: Dublin',
+            'D: London'
+            )
+        CorrectAnswer = 'A'
+   },
+    [pscustomobject]@{
+        Question = "What is 4 * 5?";
+        Answers = (
+            'A: 2',
+            'B: 9',
+            'C: 20',
+            'D: 7'
+            )
+        CorrectAnswer = 'C'
+        }
+    [pscustomobject]@{
+        Question = "What is 4 * 6?";
+        Answers = (
+            'A: 20',
+            'B: 90',
+            'C: 42',
+            'D: 24'
+            )
+        CorrectAnswer = 'D'
+        }
+    )
+
+cls 
+
+
+$Questions = $Questions | Sort-Object {Get-Random}
+
+$questionCount = 0
+$correctCount = 0
+foreach ($question in $Questions)
+    {
+    $question.Question
+    foreach ($Item in $question.Answers)
+        {
+        $Item
+        }
+    $answer = Read-Host
+    ''
+    if ($answer -eq $question.CorrectAnswer)
+        {
+        write-host "Correct! `n" -foregroundcolor "green"
+        $questionCount++
+        $correctCount++
+        }
+        else
+        {
+        write-host "Incorrect!" -foregroundcolor "red "
+        
+        'Correct Answer was: ' + $question.CorrectAnswer + "`n "
+        $questionCount++
+        }
+    }
+
+$percentageRight =  $correctCount / $questionCount  * 100
+
+''
+"Out of $questionCount, you got $correctCount questions correct! `n"
+
+if ($percentageRight -ge 75)
+    {
+    write-host "    You got a $percentageRight%!! `n" -ForegroundColor "green"
+    'Congradulations! You Passed the Practice Exam!!!'
+    }
+    else
+    {
+    write-host "    You got a $percentageRight%!! `n" -ForegroundColor "red"
+    'Unfortunately, you were unable to meet the minimum score of 75%, please try again'
+    }
+
+  
