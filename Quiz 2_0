@@ -1,0 +1,11 @@
+$MQF = Import-CSV ".\QuestionTest.csv"
+
+clear 
+
+#$MQF
+$cntr = 0
+foreach($r in $MQF){
+    If($cntr <= 6){
+        
+    }
+}
