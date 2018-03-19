@@ -77,13 +77,15 @@ function Get-Quiz{
 
 	$questionCount = 0
 	$correctCount = 0
+        $displayNumber = 1
 
 	# Displays each question and answer choices
 	foreach ($question in $Questions){
 		$question.Answers = $question.Answers | Sort-Object {Get-Random}
-		$question.Question
+		Write-host `n$displayNumber") " $question.Question`n
 		$L = 0
 		$answerArray = @()
+		$displayNumber++
 		foreach ($Item in $question.Answers){
 			$output = $letter[$L] + $Item
 			$output
